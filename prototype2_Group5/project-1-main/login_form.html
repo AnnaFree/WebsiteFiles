@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="design.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    
+</head>
+<body>
+    <!--remove navbar for this page?-->
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="file2.html"><img src="MainLogo.png" alt="Mixing Logo" class="logo"></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="javascript:void(0)" class="cart-button" onclick="openCart()"><img src="cart_logo.png" alt="Cart">View Cart</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="aboutUs.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login_form.html">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="login-content">
+        <h2>Login</h2>
+        <form id="loginForm" action="" method="POST"> <!--Backend part, I dont know file name yet -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="login_signup">
+                <button type="submit">Login</button>
+            </div>
+            
+        </form>
+        <p class="signup-link">Don't have an account? <a href="signup_form.html">Make an Account</a></p>
+
+    </div>
+    <script src="script.js"></script>
+</body>

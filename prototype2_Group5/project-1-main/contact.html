@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+
+</style>
+<body>
+    <script src="script.js"></script>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="file2.html"><img src="MainLogo.png" alt="Mixing Logo" class="logo"></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="javascript:void(0)" class="cart-button" onclick="openCart()"><img src="cart_logo.png" alt="Cart">View Cart</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="aboutUs.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login_form.html">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!--generic form for now-->
+    <!--cart sidebar-->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeCart()">Close</a>
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: $<span id="cart-total">0</span></h3>
+    </div>
+    <section id="contact-section">
+        <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>Fill out the form if you have any questions!</p>
+        </div>
+        <div class="contact-container">
+            <form id="contact-form">
+                <label for="contact_full_name">Name:</label>
+                <input type="text" id="full_name" name="full_name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

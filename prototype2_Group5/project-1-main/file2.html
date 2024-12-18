@@ -1,0 +1,101 @@
+
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home Page</title>
+        <link rel="stylesheet" href="design.css">
+    </head>
+    <body>
+
+    
+        <header>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="file2.html"><img src="MainLogo.png" alt="Mixing Logo" class="logo"></a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="javascript:void(0)" class="cart-button" onclick="openCart()"><img src="cart_logo.png" alt="cart Logo">View Cart</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="aboutUs.html">About</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login_form.html">Log In</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+        <section id="main-headlines">
+            <h1>Welcome to Sound Mixing</h1>
+            <a href ="shop.html"><button class="cta-button">Shop Now</button></a>
+        </section>
+        <!--temp sidebar test-->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeCart()">Close</a>
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: $<span id="cart-total">0</span></h3>
+    </div>
+    <section id="main-services">
+        <h2>Professional Online Recording Services</h2>
+         <div class="services-container">
+            <div class="service">
+                    <img src="mastering.jpg" alt="Mastering">
+                    <h3>MASTERING SERVICE</h3>
+                    <p>Mastering service details</p>
+                    <button class="cta-button">Start Mastering Now</button>
+             </div>
+             <div class="service">
+                    <img src="mixing.jpg" alt="Mixing">
+                    <h3>MIXING SERVICE</h3>
+                    <p>Mixing service details</p>
+                    <button class="cta-button">Start Mixing Now</button>
+             </div>
+                <div class="service">
+                    <img src="recording.jpg" alt="Recording">
+                    <h3>RECORDING SERVICE</h3>
+                    <p>Recording service details</p>
+                    <button class="cta-button">Start Recording Now</button>
+                </div>
+            </div>
+    </section>
+    
+        <section id="main-testimonials">
+            <h2>Testimonials</h2>
+            <blockquote>
+                <p>"Great mixing service" - anonymous reviewer</p>
+            </blockquote>
+            <blockquote>
+                <p>"Well-made products!" - anonymous reviewer</p>
+            </blockquote>
+        </section>
+    
+        <section id="main-portfolio">
+            <h2>Our Work</h2>
+            <p>Check our shop page for our most recent products!</p>
+        </section>
+    
+        <section id="main-about">
+            <h2>About Us</h2>
+            <p>We are a small and dedicated team that will provide you with the tools to mix your own tracks or deliver you your desired audio mix.</p>
+        </section>
+    
+        <section id="contact-us">
+                <h2>Contact Us</h2>
+            <div class = "contact-section">
+                <form id="contact_form">
+                    <input type="text" name="full_name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="comment" placeholder="Comments" required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+    
+        <footer>
+            <p>&copy; 2024 Sound mixing service</p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+  
+</html>
+

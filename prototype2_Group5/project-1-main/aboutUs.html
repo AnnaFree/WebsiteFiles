@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+
+</style>
+<body>
+    <script src="script.js"></script>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="file2.html"><img src="MainLogo.png" alt="Mixing Logo" class="logo"></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="javascript:void(0)" class="cart-button" onclick="openCart()"><img src="cart_logo.png" alt="Cart">View Cart</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="aboutUs.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login_form.html">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="about-header">
+        <h1>About Us</h1>
+    </section>
+
+    <section class="about-section">
+        <h2>Our Services</h2>
+        <div class="about-us-services"> <!--inline style because i could not figure out what was wrong with the css to cause it not to import right-->
+            <div style="background-image: url('mixing.jpg');background-size: cover; background-position: center; background-repeat: no-repeat; padding: 20px; border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);margin: 20px 0;width: 80%;text-align: center; color:white;">
+                <h3>Sound Mixing</h3>
+                <p>Sound Mixing service</p>
+            </div>
+            <div style="background-image: url('mastering.jpg');background-size: cover; background-position: center; background-repeat: no-repeat; padding: 20px; border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);margin: 20px 0;width: 80%;text-align: center;color:white;">
+                <h3>Mastering</h3>
+                <p>Mastering service</p>
+            </div>
+            <div style="background-image: url('remixing.jpg');background-size: cover; background-position: center; background-repeat: no-repeat; padding: 20px; border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);margin: 20px 0;width: 80%;text-align: center;color:white;">
+                <h3>Remixing</h3>
+                <p>Remixing services</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about-wepage-content">
+        <div class="about-section">
+            <h2>Our Story</h2>
+            <p>We are sound mixing experts, not really, who wanted to help others on their journey to improving their own skills.</p>
+        </div>
+        <div class="about-section">
+            <h2>Our Team</h2>
+            <p>Our small team is passionate about our work in creating new audio tracks.</p>
+        </div>
+        <div class="about-section">
+            <h2>Our Mission</h2>
+            <p>We wish to help others achieve their own goals in mixing audio.</p>
+        </div>
+    </section>
+<!--temp sidebar test-->
+<div id="cart-sidebar" class="cart-sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeCart()">Close</a>
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <h3>Total: $<span id="cart-total">0</span></h3>
+</div>
+    <footer>
+        <p>&copy; 2024 Sound mixing service</p>
+    </footer>
+</body>
+</html>

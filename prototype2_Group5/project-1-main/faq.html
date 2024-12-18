@@ -1,0 +1,68 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+
+
+</style>
+<body>
+    
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="file2.html"><img src="MainLogo.png" alt="Mixing Logo" class="logo"></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="javascript:void(0)" class="cart-button" onclick="openCart()"><img src="cart_logo.png" alt="Cart">View Cart</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="aboutUs.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login_form.html">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="faq-header">
+        <h1>Frequently Asked Questions</h1>
+    </section>
+<!--temporary questions and answers for prototype-->
+    <section id="faq-content">
+        <div>
+            <h2 class="faq-question">Question 1: How much does the mixing service cost?</h2>
+            <p class="faq-answer">Answer: $500 for our standing mixing package. However, the cost can change lower for our first time customer and sample packaging.</p>
+        </div>
+        <div>
+            <h2 class="faq-question">Question 2: How long does it take to create the new track?</h2>
+            <p class="faq-answer">Answer: About 1 to 2 weeks depending on how many audio files there are and the desired product. We will strive to update and communicate with you throughout the process!</p>
+        </div>
+    
+            <!--example ol for a faq answer that is an insruction-->
+        <h2 class="faq-question">Question 3: How to I get started audio mixing</h2>
+            <div class="faq-answer-list">
+                <ol>
+                    <li>Buy the proper equipment through our store or online</li>
+                    <li>Taking either online courses or in-person courses is crucial in maximizing your knowledge and ability to create the best mixes.</li>
+                    <li>Start Mixing!</li>
+                    <li>If you need resources to help you get started:
+                        <ul>
+                            <li><a href ="https://www.soundguys.com/audio-mixing-guide-43045/">SoundGuys audio mixing 101</a></li>
+                            <li><a href ="https://ledgernote.com/columns/mixing-mastering/fundamental-audio-mixing-tips-techniques/">Ledgernote's fundamental audio mixing tips and techniques</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+
+    </section>
+    <!--cart sidebar-->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeCart()">Close</a>
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: $<span id="cart-total">0</span></h3>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

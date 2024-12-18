@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="stylesheet" href="design.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="file2.html"><img src="MainLogo.png" alt="Mixing Logo" class="logo"></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="javascript:void(0)" class="cart-button" onclick="openCart()"><img src="cart_logo.png" alt="Cart">View Cart</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="aboutUs.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login_form.html">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="shop-header">
+        <h1>Our Products</h1>
+    </section>
+   
+    <section id="products">
+        <div class="product">
+            <img src="product1.jpg" alt="tempProduct1">
+            <h3>A soundboard product</h3>
+            <p class="price">$100</p>
+            <p>It mixes audio</p>
+            <button class="cta-button">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="product2.jpg" alt="tempProduct2">
+            <h3>Another soundboard product</h3>
+            <p class="price">$100</p>
+            <p>It also mixes audio</p>
+            <button class="cta-button">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="product3.jpg" alt="tempProduct3">
+            <h3>A crab</h3>
+            <p class="price">$100</p>
+            <p>Oh look, a crab</p>
+            <button class="cta-button">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="product4.jpg" alt="tempProduct4">
+            <h3>A Tortoise</h3>
+            <p class="price">$200</p>
+            <p>A tortoise wearing a dino shell cover</p>
+            <button class="cta-button">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="product5.jpg" alt="tempProduct5">
+            <h3>An even bigger crab</h3>
+            <p class="price">$700</p>
+            <p>WWE Crab</p>
+            <button class="cta-button">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="product6.jpg" alt="tempProduct6">
+            <h3>A mushroom</h3>
+            <p class="price">$50</p>
+            <p>A tiny red and white mushroom</p>
+            <button class="cta-button">Add to Cart</button>
+        </div>
+    </section>
+    
+    <div id="cart-sidebar" class="cart-sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeCart()">Close</a>
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: $<span id="cart-total">0</span></h3>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Sound mixing service</p>
+    </footer>
+</body>
+</html>

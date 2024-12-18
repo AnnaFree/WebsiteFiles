@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="design.css"> 
+</head>
+<body>
+    <!--remove navbar for this page and replace with button?-->
+    
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="file2.html"><img src="MainLogo.png" alt="Mixing Logo" class="logo"></a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="javascript:void(0)" class="cart-button" onclick="openCart()"><img src="cart_logo.png" alt="Cart">View Cart</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="aboutUs.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="profile-content">
+        <h2><p id="firstName"> </p><p id="lastName"></p></h2><!--doesnt show up until login-->
+        <div class="profile-info">
+            <p><strong>Username:</strong> <span id="usernameDisplay"></span></p>
+            <p><strong>Email:</strong> <span id="emailDisplay"></span></p>
+        </div>
+    </div>
+    <div class="signOutButton">
+        <button type="submit">Sign Out</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
