@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loans and Debt - Beyond Spreadsheets</title>
+    
+</head>
+<body>
+    <div class="navbar"> <!--navbar start-->
+        <a href="beyondSpreadsheets_Main.html">Beyond Spreadsheets</a>
+        <div class="dropdown">
+            <a href="loans_and_debt.html">Loans and Debt</a>
+            <div class="dropdown-content">
+                <a href="loans_and_debt.html">Create Loan/Debt Information</a>
+                <a href="loans_and_debt_update_amount.html">Update Amount Outstanding</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="revenue_calculate_income.html">Revenue</a>
+            <div class="dropdown-content">
+                <a href="revenue_calculate_income.html">Calculate Net Income</a>
+            </div>
+        </div>
+        <a href="expenses.html">Expenses</a> <!--no dropdown for now-->
+        <div class="dropdown">
+            <a href="milestone_create.html">Milestones</a>
+            <div class="dropdown-content">
+                <a href="milestone_create.html">Create Milestone</a>
+            </div>
+        </div>
+        <a href="spreadsheets_summary.html">Summary</a> 
+        <div id="navLoginButton" class="login-button">
+            <a href="login.html" id="loginLink">Login</a>
+        </div>   
+    </div> <!--navbar end-->
+
+    <div class="loans-header-row"> 
+        <h1>Update Amount Outstanding</h1>
+    </div>
+
+    <div class="loans-content-row">
+        <div class="loans-content-column">
+            <h2>Update Amount Outstanding</h2>
+            <form id="amountOutstandingForm">
+                <div class="form-group">
+                    <label for="amountOutstanding">Total Amount Outstanding:</label>
+                    <input type="number" id="amountOutstanding" name="amountOutstanding" required>
+                </div>
+                <div class="form-group">
+                    <label for="payAmount">Amount Payed:</label>
+                    <input type="number" step="100" id="payAmount" name="payAmount" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="payAmount">Next Debt Payment:</label>
+                    <input type="date" id="debtDueDate" name="debtDueDate"> <!--not required in case they payed total amount, might coincide with is_active-->
+                </div>
+                <div class="formSubmitButton">
+                    <button type="button" onClick="onSubmitDebt()">Submit</button>
+                </div>
+                
+            </form>
+        </div>
+        <div class="loans-content-column">
+            <h2>Amount Outstanding Summary</h2>
+            <p>A summary of the data if that is what we want to add, else this can just be another visual chart column.</p>
+            <div id="debtUpdateArea" ></div>
+        </div>
+        <div class="loans-content-column">
+            <h2>Visual Data</h2>
+            <p>Visual chart for our information.</p>
+            <div id="chartContainer">
+                <canvas id="myChart"></canvas>
+              </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="debtTotalValue" hidden/>
+    <input type="hidden" id="amountPaidTotalValue" hidden/>
+</body>
+<script type="text/javascript">
+    class DebtUpdate {
+      constructor(amountOutstanding, payAmount, debtDueDate) {
+        this.amountOutstanding = amountOutstanding;
+        this.payAmount = payAmount;
+        this.debtDueDate = debtDueDate;
+        
+      }
+    }
+
+    const allDebts = [];
+    function onSubmitDebt() {
+        // Get amount
+        const amountOutstanding = document.getElementById("amountOutstanding").value;
+
+        const payAmount = document.getElementById("payAmount").value;
+
+        const debtDueDate = document.getElementById("debtDueDate").value;
+        
+        
+      
+2
+        // Create milestone object with amountOutstanding and expenses amount
+        const totalDebts = new DebtUpdate(amountOutstanding, payAmount, debtDueDate);
+
+
+        // Add milestone object to an array of milestone objects
+        allDebts.push(totalDebts);
+            
+        //clear all milestone
+        const debtUpdateArea = document.getElementById("debtUpdateArea");
+        debtUpdateArea.innerHTML = "";
+
+        let debtTotalValue = 0;
+        let amountPaidTotalValue = 0;
+        // Display all milestone objects in specified area on page
+        for (let i = 0; i <allDebts.length; ++i) {
+            const debtUpdateCard = document.createElement('div');
+            debtUpdateCard.className = "debt-update-card";
+            debtUpdateCard.id = `debt-update-card-${i}`;
+
+        const amountOutstandingPTag = document.createElement('p');
+        amountOutstandingPTag.innerHTML = `Amount Outstanding: <span id="amount-outstanding-${i}">${allDebts[i].amountOutstanding}</span>`;
+
+        const payAmountPTag = document.createElement('p');
+        payAmountPTag.innerHTML = `Amount Paid: <span id="amount-paid-${i}">${allDebts[i].payAmount}</span>`;
+
+        const debtDueDatePTag = document.createElement('p');
+        debtDueDatePTag.innerHTML = `Next Payment Date: <span id="next-payment-${i}">${allDebts[i].debtDueDate}</span>`;
+
+
+
+
+        debtUpdateCard.appendChild(amountOutstandingPTag);
+        debtUpdateCard.appendChild(payAmountPTag);
+        debtUpdateCard.appendChild(debtDueDatePTag);
+        
+        debtUpdateArea.appendChild(debtUpdateCard);
+
+        debtTotalValue += parseInt(allDebts[i].amountOutstanding);
+        amountPaidTotalValue += parseInt(allDebts[i].payAmount);
+
+        }
+
+        // Update hidden input elements with total milestone and total savings amounts
+        const debtTotalAmountElement = document.getElementById("debtTotalValue");
+        debtTotalAmountElement.value = debtTotalValue;
+        const amountPaidTotalAmountElement = document.getElementById("amountPaidTotalValue");
+        amountPaidTotalAmountElement.value = amountPaidTotalValue;
+
+        const tempCtx = document.getElementById('myChart');
+        tempCtx.remove();
+
+        const chartContainer = document.getElementById("chartContainer");
+        const ctx = document.createElement("canvas");
+        ctx.id = "myChart";
+        chartContainer.appendChild(ctx);
+  
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: [
+        'Total Amounts Outstanding',
+        'Total Payments',
+      ],
+      datasets: [{
+        label: 'Total Debt Updates',
+        data: [parseInt(debtTotalValue),parseInt((amountPaidTotalValue))],
+        backgroundColor: [
+          'rgb(0, 204, 102)',
+          'rgb(102, 178, 255)',
+        ],
+        hoverOffset: 15
+        }]
+        }
+      });
+
+      ctx.data.labels.push("Doot");
+      chart.data.datasets.forEach((dataset) => {
+          dataset.data.push(10);
+      });
+      chart.update();
+    }
+    
+    </script>
+</html>

@@ -1,0 +1,187 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeyondSpreadsheets: Revenue Calculate Income</title>
+    
+</head>
+<body>
+    <div class="navbar"> <!--navbar start-->
+        <a href="beyondSpreadsheets_Main.html">Beyond Spreadsheets</a>
+        <div class="dropdown">
+            <a href="loans_and_debt.html">Loans and Debt</a>
+            <div class="dropdown-content">
+                <a href="loans_and_debt.html">Create Loan/Debt Information</a>
+                <a href="loans_and_debt_update_amount.html">Update Amount Outstanding</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="revenue_calculate_income.html">Revenue</a>
+            <div class="dropdown-content">
+                <a href="revenue_calculate_income.html">Calculate Net Income</a>
+            </div>
+        </div>
+        <a href="expenses.html">Expenses</a> <!--no dropdown for now-->
+        <div class="dropdown">
+            <a href="milestone_create.html">Milestones</a>
+            <div class="dropdown-content">
+                <a href="milestone_create.html">Create Milestone</a>
+            </div>
+        </div>
+        <a href="spreadsheets_summary.html">Summary</a>    
+    </div> <!--navbar end-->
+
+    <div class="revenue-header-row"> 
+        <h1>Revenue</h1>
+    </div>
+
+    <div class="revenue-content-row">
+        <div class="revenue-content-column">
+            <h2>Income Information</h2>
+            <form id="revenueForm">
+                <div class="form-group">
+                    <label for="incomeAmount">Income Amount:</label>
+                    <input type="number" id="incomeAmount" name="incomeAmount" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="incomeSource">Source of Income:</label>
+                    <input type="text" id="incomeSource" name="incomeSource" required>
+                </div>
+                <div class="form-group">
+                    <label for="incomeDate">Date of Income Payment:</label>
+                    <input type="date" id="incomeDate" name="incomeDate" required>
+                </div>
+                <div class="formSubmitButton">
+                    <button type="button" onClick="onSubmitIncome()">Submit</button>
+                </div>
+
+           
+
+            </form>
+
+        </div>
+        <div class="revenue-content-column">
+            <h2>Revenue Summary</h2>
+            <p>A summary of the data if that is what we want to add, else this can just be another visual chart column.</p>
+            <div id="incomeArea" ></div>
+               <!-- <div id="incomeCard-1"> -->
+                   <!-- <p>Your total revenue amount is: <span id="revenue-amount-1"></span></p>
+                    <p>Income Source: <span id="income-source-1"></span></p> 
+                    <p>Income Date: <span id="income-date-1"></span></p> -->
+                </div>
+            </div>
+          
+        </div>
+        <div class="revenue-content-column">
+            <h2>Visual Data</h2>
+            <p>Visual chart for our information.</p>
+            <div id="chartContainer">
+                <canvas id="myChart"></canvas>
+              </div>
+        </div>
+    </div>
+    <input type="hidden" id="revenueTotalValue" hidden/>
+
+</body>
+
+
+<script type="text/javascript">
+    class Income {
+      constructor(revenueAmount, incomeSource, incomeDate) {
+        this.revenueAmount = revenueAmount;
+        this.incomeSource = incomeSource;
+        this.incomeDate = incomeDate;
+      }
+    }
+
+    const allIncome = [];
+    function onSubmitIncome() {
+        // Get amount
+        const revenueAmount = document.getElementById("incomeAmount").value;
+
+        const incomeSource = document.getElementById("incomeSource").value;
+
+        const incomeDate = document.getElementById("incomeDate").value;
+        
+      
+2
+        // Create milestone object with revenueAmount and expenses amount
+        const totalIncome = new Income(revenueAmount, incomeSource, incomeDate);
+
+
+        // Add milestone object to an array of milestone objects
+        allIncome.push(totalIncome);
+            
+        //clear all milestone
+        const incomeArea = document.getElementById("incomeArea");
+        incomeArea.innerHTML = "";
+
+        let revenueTotalValue = 0;
+
+        // Display all milestone objects in specified area on page
+        for (let i = 0; i <allIncome.length; ++i) {
+            const revenueCard = document.createElement('div');
+            revenueCard.className = "income-card";
+            revenueCard.id = `income-card-${i}`;
+
+        const revenueAmountPTag = document.createElement('p');
+        revenueAmountPTag.innerHTML = `Amount Received: <span id="revenue-amount-${i}">${allIncome[i].revenueAmount}</span>`;
+
+        const incomeSourcePTag = document.createElement('p');
+        incomeSourcePTag.innerHTML = `Income source: <span id="source-${i}">${allIncome[i].incomeSource}</span>`;
+
+        const incomeDatePTag = document.createElement('p');
+        incomeDatePTag.innerHTML = `Date: <span id="income-date-${i}">${allIncome[i].incomeDate}</span>`;
+
+
+        revenueCard.appendChild(revenueAmountPTag);
+        revenueCard.appendChild(incomeSourcePTag);
+        revenueCard.appendChild(incomeDatePTag);
+        incomeArea.appendChild(revenueCard);
+
+        revenueTotalValue += parseInt(allIncome[i].revenueAmount);
+        
+        }
+
+        // Update hidden input elements with total milestone and total savings amounts
+        const revenueTotalAmountElement = document.getElementById("revenueTotalValue");
+        revenueTotalAmountElement.value = revenueTotalValue;
+
+        const tempCtx = document.getElementById('myChart');
+        tempCtx.remove();
+
+        const chartContainer = document.getElementById("chartContainer");
+        const ctx = document.createElement("canvas");
+        ctx.id = "myChart";
+        chartContainer.appendChild(ctx);
+  
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: [
+        'Total Revenue',
+      ],
+      datasets: [{
+        label: 'Total Income',
+        data: [parseInt(revenueTotalValue)],
+        backgroundColor: [
+          'rgb(0, 204, 102)',
+          'rgb(102, 178, 255)',
+        ],
+        hoverOffset: 15
+        }]
+        }
+      });
+
+      ctx.data.labels.push("Doot");
+      chart.data.datasets.forEach((dataset) => {
+          dataset.data.push(10);
+      });
+      chart.update();
+    }
+    
+    </script>
+</html>

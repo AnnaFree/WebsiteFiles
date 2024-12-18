@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond Spreadsheets</title>
+</head>
+<body>
+
+    <div class="navbar"> <!--navbar start-->
+        <a href="beyondSpreadsheets_Main.html">Beyond Spreadsheets</a>
+        <div class="dropdown">
+            <a href="loans_and_debt.html">Loans and Debt</a>
+            <div class="dropdown-content">
+                <a href="loans_and_debt.html">Create Loan/Debt Information</a>
+                <a href="loans_and_debt_update_amount.html">Update Amount Outstanding</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="revenue_calculate_income.html">Revenue</a>
+            <div class="dropdown-content">
+                <a href="revenue_calculate_income.html">Calculate Net Income</a>
+            </div>
+        </div>
+        <a href="expenses.html">Expenses</a> <!--no dropdown for now-->
+        <div class="dropdown">
+            <a href="milestone_create.html">Milestones</a>
+            <div class="dropdown-content">
+                <a href="milestone_create.html">Create Milestone</a>
+            </div>
+        </div>
+        <a href="spreadsheets_summary.html">Summary</a> 
+        <div id="navLoginButton" class="login-button">
+            <a href="login.html" id="loginLink">Login</a>
+        </div>   
+    </div> <!--navbar end-->
+
+    <div class="dynamic-image">
+        <img src="crappy_stock_image_coins.jpg" alt="Image of Coins">
+        <div class="overlay-text">
+            <h1>Expenses</h1>
+        </div>
+    </div>
+    <div class="expenses-content-row">
+        <div class="expenses-content-column">
+            <h2>Update Amount Outstanding</h2>
+            <form id="expensesAmountForm">
+                <div class="form-group">
+                    <label for="expenseAmount">Expense:</label>
+                    <input type="number" id="expenseAmount" name="expenseAmount" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="expenseCategory">Category:</label>
+                    <input type="text" id="expenseCategory" name="expenseCategory" placeholder="Category" required> <!--can do a dropdown list if that's easier for javascript and database-->
+                </div>
+                <div class="form-group">
+                    <label for="expenseMerchant">Merchant:</label>
+                    <input type="text" id="expenseMerchant" name="expenseMerchant" placeholder="Merchant" required> <!--can do a dropdown list if that's easier for javascript and database-->
+                </div>
+                <div class="form-group">
+                    <label for="expenseDate">Date of Expense:</label>
+                    <input type="date" id="expenseDate" name="expenseDate" required>
+                </div>
+                <div class="formSubmitButton">
+                    <button type="button" onClick="onSubmitExpense()">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="expenses-content-column">
+            <h2>Expenses Summary</h2>
+            <p>A summary of the data if that is what we want to add, else this can just be another visual chart column.</p>
+            <div id="expenseArea" ></div>
+        </div>
+        <div class="expenses-content-column">
+            <h2>Visual Data</h2>
+            <p>Visual chart for our information.</p>
+            <div id="chartContainer">
+                <canvas id="myChart"></canvas>
+              </div>
+        </div>
+    </div>
+    <input type="hidden" id="expenseTotalValue" hidden/>
+</body>
+
+<script type="text/javascript">
+    class Expense {
+      constructor(expenseAmount, expenseCategory, expenseMerchant, expenseDate) {
+        this.expenseAmount = expenseAmount;
+        this.expenseCategory = expenseCategory;
+        this.expenseMerchant = expenseMerchant;
+        this.expenseDate = expenseDate;
+      }
+    }
+
+    const allExpenses = [];
+    function onSubmitExpense() {
+        // Get amount
+        const expenseAmount = document.getElementById("expenseAmount").value;
+
+        const expenseCategory = document.getElementById("expenseCategory").value;
+
+        const expenseMerchant = document.getElementById("expenseMerchant").value;
+        
+        const expenseDate = document.getElementById("expenseDate").value;
+      
+2
+        // Create milestone object with expenseAmount and expenses amount
+        const totalExpenses = new Expense(expenseAmount, expenseCategory, expenseMerchant, expenseDate);
+
+
+        // Add milestone object to an array of milestone objects
+        allExpenses.push(totalExpenses);
+            
+        //clear all milestone
+        const expenseArea = document.getElementById("expenseArea");
+        expenseArea.innerHTML = "";
+
+        let expenseTotalValue = 0;
+
+        // Display all milestone objects in specified area on page
+        for (let i = 0; i <allExpenses.length; ++i) {
+            const expenseCard = document.createElement('div');
+            expenseCard.className = "expense-card";
+            expenseCard.id = `expense-card-${i}`;
+
+        const expenseAmountPTag = document.createElement('p');
+        expenseAmountPTag.innerHTML = `Expense amount: <span id="expense-amount-${i}">${allExpenses[i].expenseAmount}</span>`;
+
+        const expenseCategoryPTag = document.createElement('p');
+        expenseCategoryPTag.innerHTML = `Category: <span id="category-${i}">${allExpenses[i].expenseCategory}</span>`;
+
+        const expenseMerchantPTag = document.createElement('p');
+        expenseMerchantPTag.innerHTML = `Merchant: <span id="merchant-${i}">${allExpenses[i].expenseMerchant}</span>`;
+
+        const expenseDatePTag = document.createElement('p');
+        expenseDatePTag.innerHTML = `Date: <span id="expense-date-${i}">${allExpenses[i].expenseDate}</span>`;
+
+
+        expenseCard.appendChild(expenseAmountPTag);
+        expenseCard.appendChild(expenseCategoryPTag);
+        expenseCard.appendChild(expenseMerchantPTag);
+        expenseCard.appendChild(expenseDatePTag);
+        expenseArea.appendChild(expenseCard);
+
+        expenseTotalValue += parseInt(allExpenses[i].expenseAmount);
+        
+        }
+
+        // Update hidden input elements with total milestone and total savings amounts
+        const expenseTotalAmountElement = document.getElementById("expenseTotalValue");
+        expenseTotalAmountElement.value = expenseTotalValue;
+
+        const tempCtx = document.getElementById('myChart');
+        tempCtx.remove();
+
+        const chartContainer = document.getElementById("chartContainer");
+        const ctx = document.createElement("canvas");
+        ctx.id = "myChart";
+        chartContainer.appendChild(ctx);
+  
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Total Expense',
+      ],
+      datasets: [{
+        label: 'Total Expense',
+        data: [parseInt(expenseTotalValue)],
+        backgroundColor: [
+          'rgb(0, 204, 102)',
+          'rgb(102, 178, 255)',
+        ],
+        hoverOffset: 15
+        }]
+        }
+      });
+
+      ctx.data.labels.push("Doot");
+      chart.data.datasets.forEach((dataset) => {
+          dataset.data.push(10);
+      });
+      chart.update();
+    }
+    
+    </script>
+</html>

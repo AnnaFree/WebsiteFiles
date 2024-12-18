@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css"> 
+</head>
+<body>
+    <div class="signup-content">
+        <h2>Sign Up for Beyond Spreadsheets</h2>
+        <form id="signupForm" action="" method="POST"> <!-- replacebackend file name -->
+            <div class="form-group"> <!--Account Type?-->
+                <label for="accountType">Account Type:</label>
+                <input list="accountTypeName" type="text" id="accountType" name="accountType" required>
+                    <datalist id="accountTypeName">
+                        <option value="Business"></option>
+                        <option value="Personal"></option>
+                    </datalist>
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Phone Number:</label>
+                <input type="tel" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Create a Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Create a Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="login_signup">
+                <button type="submit">Sign Up</button>
+            </div>
+            
+        </form>
+        <p class="login-link">Already have an account? <a href="login.html">Login here</a></p>
+        <p class="login-link">Return to <a href="beyondSpreadsheets_Main.html">Main Menu</a></p>
+    </div>
+</body>
+</html>

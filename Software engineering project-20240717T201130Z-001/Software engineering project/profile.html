@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css"> 
+</head>
+<body>
+    <!--remove navbar for this page?-->
+    <div class="navbar"> <!--navbar start-->
+        <a href="beyondSpreadsheets_Main.html">Beyond Spreadsheets</a>
+        <div class="dropdown">
+            <a href="loans_and_debt.html">Loans and Debt</a>
+            <div class="dropdown-content">
+                <a href="loans_and_debt.html">Create Loan/Debt Information</a>
+                <a href="loans_and_debt_update_amount.html">Update Amount Outstanding</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="revenue_calculate_income.html">Revenue</a>
+            <div class="dropdown-content">
+                <a href="revenue_calculate_income.html">Calculate Net Income</a>
+            </div>
+        </div>
+        <a href="expenses.html">Expenses</a> <!--no dropdown for now-->
+        <div class="dropdown">
+            <a href="milestone_create.html">Milestones</a>
+            <div class="dropdown-content">
+                <a href="milestone_create.html">Create Milestone</a>
+            </div>
+        </div>
+        <a href="spreadsheets_summary.html">Summary</a> 
+        
+    </div> <!--navbar end-->
+
+    <div class="profile-content">
+        <h2>User Profile:</h2>
+        <div class="profile-info">
+            <p><strong>Username:</strong> <span id="usernameDisplay"></span></p>
+            <p><strong>Email:</strong> <span id="emailDisplay"></span></p>
+        </div>
+    </div>
+    <div class="signOutButton">
+        <button type="submit">Sign Out</button>
+    </div>
+
+    <script src="scriptName.js" defer></script> <!--I could not find the .js file on the Google Drive-->
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    
+</head>
+<body>
+    <!--remove navbar for this page?-->
+    <div class="navbar"> <!--navbar start-->
+        <a href="beyondSpreadsheets_Main.html">Beyond Spreadsheets</a>
+        <div class="dropdown">
+            <a href="loans_and_debt.html">Loans and Debt</a>
+            <div class="dropdown-content">
+                <a href="loans_and_debt.html">Create Loan/Debt Information</a>
+                <a href="loans_and_debt_update_amount.html">Update Amount Outstanding</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="revenue_calculate_income.html">Revenue</a>
+            <div class="dropdown-content">
+                <a href="revenue_calculate_income.html">Calculate Net Income</a>
+            </div>
+        </div>
+        <a href="expenses.html">Expenses</a> <!--no dropdown for now-->
+        <div class="dropdown">
+            <a href="milestone_create.html">Milestones</a>
+            <div class="dropdown-content">
+                <a href="milestone_create.html">Create Milestone</a>
+            </div>
+        </div>
+        <a href="spreadsheets_summary.html">Summary</a> 
+        <div id="navLoginButton" class="login-button">
+            <a href="login.html" id="loginLink">Login</a>
+        </div>   
+    </div> <!--navbar end-->
+    <div class="login-content">
+        <h2>Login to Beyond Spreadsheets</h2>
+        <form id="loginForm" action="" method="POST"> <!--Backend part, I dont know file name yet -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="login_signup">
+                <button type="submit">Login</button>
+            </div>
+            
+        </form>
+        <p class="signup-link">Don't have an account? <a href="signup.html">Make an Account</a></p>
+    </div>
+</body>

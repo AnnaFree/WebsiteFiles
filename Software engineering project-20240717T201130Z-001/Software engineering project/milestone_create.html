@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BeyondSpreadsheets: Milestones</title>
+  </head>
+  <div class="navbar"> <!--navbar start-->
+    <a href="beyondSpreadsheets_Main.html">Beyond Spreadsheets</a>
+    <div class="dropdown">
+        <a href="loans_and_debt.html">Loans and Debt</a>
+        <div class="dropdown-content">
+            <a href="loans_and_debt.html">Create Loan/Debt Information</a>
+            <a href="loans_and_debt_update_amount.html">Update Amount Outstanding</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <a href="revenue_calculate_income.html">Revenue</a>
+        <div class="dropdown-content">
+            <a href="revenue_calculate_income.html">Calculate Net Income</a>
+        </div>
+    </div>
+    <a href="expenses.html">Expenses</a> <!--no dropdown for now-->
+    <div class="dropdown">
+        <a href="milestone_create.html">Milestones</a>
+        <div class="dropdown-content">
+            <a href="milestone_create.html">Create Milestone</a>
+        </div>
+    </div>
+    <a href="spreadsheets_summary.html">Summary</a> 
+    <div id="navLoginButton" class="login-button">
+        <a href="login.html" id="loginLink">Login</a>
+    </div>   
+</div> <!--navbar end-->
+    <div class="milestone-header-row">
+      <h1>Milestones</h1>
+    </div>
+    <div class="content-main">
+      <h2>Milestones</h2>
+      <p>
+        Create your own milestones to help keep yourself on track to reaching
+        your financial goals.
+      </p>
+      <p id="doot"></p>
+    </div>
+
+    <div class="milestone-content-row">
+      <div class="milestone-content-column">
+        <h2>Setting Your Milestone</h2>
+        <form id="milestoneForm">
+          <div class="form-group">
+            <label for="milestoneAmount">Milestone Amount:</label>
+            <input type="number" step="100" id="milestoneAmount" name="milestoneAmount" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="savingsAmount">Current Savings:</label>
+            <input type="number"  step="100" id="savingsAmount" name="savingsAmount" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="milestoneDate">Set the date you want to meet your goal at:</label>
+            <input type="date" id="milestoneDate" name="milestoneDate" required>
+          </div>
+          <div class="formSubmitButton">
+            <button type="button" onClick="onSubmitGoals()">Submit</button>
+        </div>
+        </form>
+      </div>
+      <div class="milestone-content-column">
+        <h2>Milestone Summary</h2>
+        <p>
+          A summary of the data if that is what we want to add, else this can
+          just be another visual chart column.
+        </p>
+        <div id="milestoneArea">
+        </div>
+
+      </div>
+      <div class="milestone-content-column">
+        <h2>Visual Data</h2>
+        <p>Visual chart for our information.</p>
+          <div id="chartContainer">
+            <canvas id="myChart"></canvas>
+          </div>
+
+      </div>
+    </div>
+    <input type="hidden" id="milestoneTotalValue" hidden/>
+    <input type="hidden" id="savingsTotalValue" hidden/>
+  </body>
+  <script type="text/javascript">
+    class MileStone {
+      constructor(milestoneAmount, savingsAmount, milestoneDate) {
+        this.milestoneAmount = milestoneAmount;
+        this.savingsAmount = savingsAmount;
+        this.milestoneDate = milestoneDate;
+
+        // Caclulated property that is the milestone completion percentage
+        this.milestoneCompletion = (savingsAmount/milestoneAmount)
+      }
+    }
+
+    const allMilestones = [];
+    function onSubmitGoals() {
+        // Get milestone amount
+        const milestoneAmount = document.getElementById("milestoneAmount").value;
+
+        // get currentSavings amount
+        const currentSavings = document.getElementById("savingsAmount").value;
+
+        const milestoneDate = document.getElementById("milestoneDate").value;
+
+        // Create milestone object with milestoneamount and currentsavings amount
+        const milestone = new MileStone(milestoneAmount, currentSavings, milestoneDate);
+
+        // Add milestone object to an array of milestone objects
+        allMilestones.push(milestone);
+
+        // Clear all previous milestones
+        const milestoneArea = document.getElementById("milestoneArea");
+        milestoneArea.innerHTML = "";
+
+        // variable to hold total milestone amounts
+        let milestoneTotalValue = 0;
+        // variable to hold total savings amounts
+        let savingsTotalValue = 0;
+
+        // Display all milestone objects in specified area on page
+        for (let i = 0; i < allMilestones.length; ++i) {
+            const mileStoneCard = document.createElement('div');
+            mileStoneCard.className = "milestone-card";
+            mileStoneCard.id = `milestone-card-${i}`;
+
+            // <p>Your milestone amount is <span id="">content</span></p>
+            const milestoneAmountPTag = document.createElement('p');
+            milestoneAmountPTag.innerHTML = `Your milestone amount is: <span id="milestone-amount-${i}">${allMilestones[i].milestoneAmount}</span>`;
+
+            // <p>Your current amount saved is: <span id="">content</span></p>
+            const savingsAmountPTag = document.createElement('p');
+            savingsAmountPTag.innerHTML = `Your current amount saved is: <span id="current-savings-amount-${i}">${allMilestones[i].savingsAmount}</span>`;
+            
+            const milestoneDatePTag = document.createElement('p');
+            milestoneDatePTag.innerHTML = `Reach your goal by: <span id="milestone-date-${i}">${allMilestones[i].milestoneDate}</span>`;
+    
+            const milestoneCompletionProgressBar = document.createElement('div');  
+            milestoneCompletionProgressBar.innerHTML = `Milestone Progress: <progress id="milestone-bar-${i}" value="${allMilestones[i].savingsAmount}" max="${allMilestones[i].milestoneAmount}"></progress>`;
+ 
+            mileStoneCard.appendChild(milestoneAmountPTag);
+            mileStoneCard.appendChild(savingsAmountPTag);
+            mileStoneCard.appendChild(milestoneDatePTag);
+            // Append label and progress bar elements
+            mileStoneCard.appendChild(milestoneCompletionProgressBar);
+            milestoneArea.appendChild(mileStoneCard);
+
+            // Update milestone and savings VARIABLES with value from current milestone
+            // EG: milestoneTotalAmount += currentMilestoneAmount
+            milestoneTotalValue += parseInt(allMilestones[i].milestoneAmount);
+            savingsTotalValue += parseInt(allMilestones[i].savingsAmount);
+        }
+
+        // Update hidden input elements with total milestone and total savings amounts
+        const milestoneTotalAmountElement = document.getElementById("milestoneTotalValue");
+        milestoneTotalAmountElement.value = milestoneTotalValue;
+        const savingsTotalAmountElement = document.getElementById("savingsTotalValue");
+        savingsTotalAmountElement.value = savingsTotalValue;
+
+        const tempCtx = document.getElementById('myChart');
+        tempCtx.remove();
+
+        const chartContainer = document.getElementById("chartContainer");
+        const ctx = document.createElement("canvas");
+        ctx.id = "myChart";
+        chartContainer.appendChild(ctx);
+  
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: [
+        'Total Milestones',
+        'Total Savings',
+      ],
+      datasets: [{
+        label: 'Total Milestone Progress',
+        data: [parseInt(milestoneTotalValue),parseInt((savingsTotalValue))],
+        backgroundColor: [
+          'rgb(0, 204, 102)',
+          'rgb(102, 178, 255)',
+        ],
+        hoverOffset: 15
+        }]
+        }
+      });
+
+      ctx.data.labels.push("Doot");
+      chart.data.datasets.forEach((dataset) => {
+          dataset.data.push(10);
+      });
+      chart.update();
+    }
+    
+  </script>
+</html>

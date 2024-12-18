@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="beyondSpreadsheets_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loans and Debt(Beyond Spreadsheets)</title>
+    
+</head>
+<body>
+    <div class="navbar"> <!--navbar start-->
+        <a href="beyondSpreadsheets_Main.html">Beyond Spreadsheets</a>
+        <div class="dropdown">
+            <a href="loans_and_debt.html">Loans and Debt</a>
+            <div class="dropdown-content">
+                <a href="loans_and_debt.html">Create Loan/Debt Information</a>
+                <a href="loans_and_debt_update_amount.html">Update Amount Outstanding</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="revenue_calculate_income.html">Revenue</a>
+            <div class="dropdown-content">
+                <a href="revenue_calculate_income.html">Calculate Net Income</a>
+            </div>
+        </div>
+        <a href="expenses.html">Expenses</a> <!--no dropdown for now-->
+        <div class="dropdown">
+            <a href="milestone_create.html">Milestones</a>
+            <div class="dropdown-content">
+                <a href="milestone_create.html">Create Milestone</a>
+            </div>
+        </div>
+        <a href="spreadsheets_summary.html">Summary</a> 
+        <div id="navLoginButton" class="login-button">
+            <a href="login.html" id="loginLink">Login</a>
+        </div>   
+    </div> <!--navbar end-->
+
+    <div class="loans-header-row"> 
+        <h1>Tracking Your Loan Repayment</h1>
+    </div>
+
+    <div class="loans-content-row">
+        <div class="loans-content-column">
+            <h2>Loan and Debt Information</h2>
+            <form id="loanTypeForm">
+                <div class="form-group">
+                    <label for="loanType">Loan Type:</label>
+                    <select id="loanType" name="loanType">
+                        <option value="Home">Mortgage Loan</option>
+                        <option value="Personal">Personal Loan</option>
+                        <option value="Business">Business Loan</option>
+                        <option value="Other">Other Loan(s)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="loanAmount">Loan Amount:</label>
+                    <input type="number" id="loanAmount" name="loanAmount" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="debtDueDate">Debt Repayment Date:</label>
+                    <input type="date" id="debtDueDate" name="debtDueDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="interestRate">Interest Rate:</label>
+                    <input type="number" step="0.01" id="interestRate" name="interestRate" min="0" required>
+                </div>
+                <div class="formSubmitButton">
+                    <button type="button" onClick="onSubmitDebt()">Submit</button>
+                </div>
+        </form>
+        </div>
+        <div class="loans-content-column">
+            <h2>Loan and Debt Summary</h2>
+            <p>A summary of the data if that is what we want to add, else this can just be another visual chart column.</p>
+            <div id="debtArea" ></div>
+
+        </div>
+        <div class="loans-content-column">
+            <h2>Visual Data</h2>
+            <p>Visual chart for our information.</p>
+            <div id="chartContainer">
+                <canvas id="myChart"></canvas>
+              </div>
+        </div>
+    </div>
+    <input type="hidden" id="debtTotalValue" hidden/>
+
+</body>
+<script type="text/javascript">
+    class Debt {
+      constructor(loanAmount, loanType, interestRate, debtDueDate) {
+        this.loanAmount = loanAmount;
+        this.loanType = loanType;
+        this.interestRate = interestRate;
+        this.debtDueDate = debtDueDate;
+      }
+    }
+
+    const allDebt = [];
+    function onSubmitDebt() {
+        // Get amount
+        const loanAmount = document.getElementById("loanAmount").value;
+
+        const loanType = document.getElementById("loanType").value;
+
+        const interestRate = document.getElementById("interestRate").value;
+        
+        const debtDueDate = document.getElementById("debtDueDate").value;
+      
+2
+        // Create milestone object with loanAmount and debt amount
+        const totalDebt = new Debt(loanAmount, loanType, interestRate, debtDueDate);
+
+
+        // Add milestone object to an array of milestone objects
+        allDebt.push(totalDebt);
+            
+        //clear all milestone
+        const debtArea = document.getElementById("debtArea");
+        debtArea.innerHTML = "";
+
+        let debtTotalValue = 0;
+
+        // Display all milestone objects in specified area on page
+        for (let i = 0; i <allDebt.length; ++i) {
+            const debtCard = document.createElement('div');
+            debtCard.className = "debt-card";
+            debtCard.id = `debt-card-${i}`;
+
+        const loanAmountPTag = document.createElement('p');
+        loanAmountPTag.innerHTML = `Debt amount: <span id="debt-amount-${i}">${allDebt[i].loanAmount}</span>`;
+
+        const loanTypePTag = document.createElement('p');
+        loanTypePTag.innerHTML = `Category: <span id="type-${i}">${allDebt[i].loanType}</span>`;
+
+        const interestRatePTag = document.createElement('p');
+        interestRatePTag.innerHTML = `Interest Rate: <span id="interest-${i}">${allDebt[i].interestRate}</span>`;
+
+        const debtDueDatePTag = document.createElement('p');
+        debtDueDatePTag.innerHTML = `Date: <span id="debt-date-${i}">${allDebt[i].debtDueDate}</span>`;
+
+
+        debtCard.appendChild(loanAmountPTag);
+        debtCard.appendChild(loanTypePTag);
+        debtCard.appendChild(interestRatePTag);
+        debtCard.appendChild(debtDueDatePTag);
+        debtArea.appendChild(debtCard);
+
+        debtTotalValue += parseInt(allDebt[i].loanAmount);
+        
+        }
+
+        // Update hidden input elements with total milestone and total savings amounts
+        const expenseTotalAmountElement = document.getElementById("debtTotalValue");
+        expenseTotalAmountElement.value = debtTotalValue;
+
+        const tempCtx = document.getElementById('myChart');
+        tempCtx.remove();
+
+        const chartContainer = document.getElementById("chartContainer");
+        const ctx = document.createElement("canvas");
+        ctx.id = "myChart";
+        chartContainer.appendChild(ctx);
+  
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Total Debt',
+      ],
+      datasets: [{
+        label: 'Total Debt',
+        data: [parseInt(debtTotalValue)],
+        backgroundColor: [
+          'rgb(0, 204, 102)',
+          'rgb(102, 178, 255)',
+        ],
+        hoverOffset: 15
+        }]
+        }
+      });
+
+      ctx.data.labels.push("Doot");
+      chart.data.datasets.forEach((dataset) => {
+          dataset.data.push(10);
+      });
+      chart.update();
+    }
+    
+    </script>
+</html>
